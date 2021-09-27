@@ -1,0 +1,51 @@
+<ng-container *ngIf='successMsg'>
+    <p>{{successMsg}}</p>
+</ng-container>
+
+<ng-container *ngIf='errorMsg; else noError'>
+    <p>{{errorMsg}}</p>
+</ng-container>
+
+<ng-template #noError>
+
+        <ng-container *ngIf='loading; else view'>
+            <mat-spinner></mat-spinner> 
+        </ng-container>
+
+        <ng-template #view>
+            <app-pick-player 
+                *ngIf='!player && !isRandom; else show;'
+                [isRandom]='isRandom'
+            >
+            </app-pick-player>
+
+            <ng-template #show>
+                <app-start-random 
+                    *ngIf='!isAstaStarted || !player; else player' 
+                    [isRandom]='isRandom'
+                >
+                </app-start-random>
+                <ng-template #player>
+                    <app-show-player 
+                        [game]='game' 
+                        [isRandom]='isRandom'
+                    >
+                    </app-show-player>
+                    <app-countdown ></app-countdown>
+                    <app-bid></app-bid>
+                    <app-in-asta></app-in-asta>
+                </ng-template>
+                
+            </ng-template>
+
+            <app-preview-teams></app-preview-teams>
+            
+        </ng-template>
+
+
+</ng-template>
+
+
+
+
+

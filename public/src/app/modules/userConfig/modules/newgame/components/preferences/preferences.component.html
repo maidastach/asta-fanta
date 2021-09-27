@@ -1,0 +1,66 @@
+{{errorMsg}}
+
+<ng-container *ngIf="!loading; else spinner">
+    <form class='configForm' [formGroup]="leagueForm" (submit)='handleSubmit(leagueForm.value)'>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Nome della Lega</mat-label>
+                <input matInput type="text" class="example-right-align" formControlName='name'>
+                <span matPrefix><img src="./assets/images/jersey.png"></span>
+            </mat-form-field>
+            <div>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Giocatori min.</mat-label>
+                    <input matInput type="number" class="example-right-align" formControlName='playersMin'>
+                    <span matPrefix><img src="./assets/images/jersey.png"></span>
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Giocatori max.</mat-label>
+                    <input matInput type="number" class="example-right-align" formControlName='playersMax'>
+                    <span matPrefix><img src="./assets/images/jersey.png"></span>
+                </mat-form-field> 
+            </div>
+
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Numero Squadre</mat-label>
+                <input matInput type="number" class="example-right-align" formControlName='teamsNumber'>
+                <span matPrefix><img src="./assets/images/teams.png"></span>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Crediti</mat-label>
+                <input matInput type="number" class="example-right-align" formControlName='credits'>
+                <span matPrefix><img src="./assets/images/teams.png"></span>
+            </mat-form-field> 
+
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Tipo di Gioco</mat-label>
+                <mat-select class="example-right-align" formControlName='game'>
+                    <ng-container *ngFor='let game of games'>
+                        <mat-option [value]='game'>{{game}}</mat-option>
+                    </ng-container>
+                </mat-select>
+                <span matPrefix><img src="./assets/images/game.png"></span>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Chiamata</mat-label>
+                <mat-select class="example-right-align" formControlName='isRandom'>
+                    <mat-option [value]=true>Random</mat-option>
+                    <mat-option [value]=false>Semplice</mat-option>
+                </mat-select>
+                <span matPrefix><img src="./assets/images/random.png"></span>
+            </mat-form-field>
+
+        <button type="submit" mat-raised-button color='primary' [disabled]='!leagueForm.valid'>
+            Procedi
+        </button>
+        <button mat-raised-button type='button' [routerLink]="['/game']" routerLinkActive="router-link-active"  >
+            Indietro
+        </button>
+    </form>
+</ng-container>
+
+<ng-template #spinner>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</ng-template>

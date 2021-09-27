@@ -1,0 +1,31 @@
+<router-outlet></router-outlet>
+<h1>Game</h1>
+
+<!-- if no game go straight to new game -->
+
+<!-- if game, show games with radio button and carica -->
+
+<ng-container *ngIf='leagues'>
+    <h2>Le Tue Leghe</h2>
+    <ng-container *ngFor='let league of leagues'>
+        {{league.name}}
+    </ng-container>
+</ng-container>
+
+<button 
+    mat-raised-button 
+    color='primary' 
+    [routerLink]="['/game/new-game']" 
+    routerLinkActive="router-link-active"
+>
+    Nuovo Gioco
+</button>
+
+<button 
+    mat-raised-button 
+    color='primary' 
+    [routerLink]="['/game/load-game']" 
+    routerLinkActive="router-link-active" 
+>
+    Carica Gioco
+</button>

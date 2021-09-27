@@ -1,0 +1,14 @@
+<div class="body">
+    <ng-container #playerInfo class="player">
+    <div class="player-header">
+        <div class="player-header-info">
+            <h2>{{player.name}} {{game === 'Mantra' ? player.Mantra : player.Classic}}</h2>
+            <h4>{{player.team}}</h4>
+            <h4>{{player.piede}}</h4>
+            <h4>{{player.naz}}</h4>
+        </div>
+        <img mat-card-image src={{player.img}} alt="{{player.name}}">
+    </div>            
+    <button mat-raised-button color='primary' (click)='changeRandom()'>Passa a Chiamata {{isRandom ? 'Classica' : 'Random'}}</button>
+    </ng-container>
+</div>

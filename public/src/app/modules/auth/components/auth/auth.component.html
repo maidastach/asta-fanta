@@ -1,0 +1,72 @@
+<div class="cont">
+    <form class="form sign-in" [formGroup]="login" (submit)='handleLogin(login.value)'>
+        <h2>Bentornato,</h2>
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>
+                <span>Email</span>   
+            </mat-label>
+            <input matInput type="email" formControlName='email'/>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>
+                <span>Password</span>  
+            </mat-label>
+            <input type="password" matInput formControlName='password'/>
+        </mat-form-field>
+        
+        <p class="forgot-pass">Forgot password?</p>
+        
+        <button mat-button type="submit" class="submit" [disabled]='!login.valid'>Accedi</button>
+    
+    <!--     <button type="button" class="fb-btn">Connect with <span>facebook</span></button> --> 
+    </form>
+    
+    <div class="sub-cont">
+        <div class="img">
+            <div class="img__text m--up">
+                <h2>Prima Volta qui?</h2>
+                <p>Registrati e scopri il nostro gioco!</p>
+            </div>
+            <div class="img__text m--in">
+                <h2>Gia dei nostri?</h2>
+                <p>Accedi per tornare a giocare!</p>
+            </div>
+            <div class="img__btn" (click)='swapFormView($event)'>
+                <span class="m--up">Registrati</span>
+                <span class="m--in">Accedi</span>
+            </div>
+        </div>
+    
+        <form class="form sign-up" [formGroup]="register" (submit)='handleRegister(register.value)'>
+            <h2>Teampo di unirsi a noi,</h2><h2>{{register.value.user}}</h2>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Username</span>
+                </mat-label>
+                <input type="text" matInput formControlName='user'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Email</span>
+                </mat-label>
+                <input type="email" matInput formControlName='email'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Password</span>
+                </mat-label>
+                <input type="password" matInput formControlName='password'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Conferma Password</span>
+                </mat-label>
+                <input type="password" matInput formControlName='re_password'/>
+            </mat-form-field>
+
+            <button mat-button ype="submit" class="submit" [disabled]='!register.valid'>Registrati</button>
+            <!-- <button type="button" class="fb-btn">Join with <span>facebook</span></button> -->
+        </form>
+    </div>
+</div>

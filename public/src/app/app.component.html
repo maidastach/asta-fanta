@@ -1,0 +1,5 @@
+<div class="app-container">
+    <mat-progress-bar *ngIf='loading' mode="indeterminate" class="progress"></mat-progress-bar>
+    <router-outlet></router-outlet>
+    <button mat-raised-button color='warn' (click)='logout()'>Logout</button>
+</div>

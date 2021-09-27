@@ -1,0 +1,4 @@
+<ng-container *ngIf='!isCountdownDone'>
+    <countdown #cd [config]="config" (event)="handleCountDownEvent($event)"></countdown>
+    <button mat-fab color="accent" (click)='handleCountDownButton()'>{{isCountdown ? 'Pause' : 'Start'}}</button>
+</ng-container>

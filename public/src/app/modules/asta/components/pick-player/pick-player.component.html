@@ -1,0 +1,20 @@
+<ng-container class="pick-player">
+    <mat-form-field class="player" appearance="fill">
+        <mat-label>Player</mat-label>
+        <input 
+            type="text"
+            placeholder="Type Player"
+            aria-label="Player"
+            matInput
+            name='player.name'
+            [formControl]="pickedPlayer"
+            [matAutocomplete]="auto"
+        >
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='setPlayer($event)'>
+            <mat-option *ngFor="let player of filteredPlayers | async" [value]="player.name" >
+                {{player.name}}
+            </mat-option>
+        </mat-autocomplete> 
+    </mat-form-field>
+    <button mat-raised-button color='primary' (click)='changeRandom()'>Passa a Chiamata {{isRandom ? 'Classica' : 'Random'}}</button>
+</ng-container>

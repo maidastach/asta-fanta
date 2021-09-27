@@ -1,0 +1,10 @@
+<ng-container *ngIf='currentBid; else noBid'>
+    <h2>
+        {{currentBid.team}} ha offerto {{currentBid.value}} {{currentBid.value > 1 ? 'Crediti' : 'Credito'}}} 
+    </h2>
+</ng-container>
+<ng-template #noBid>
+    <h2>
+        Nessuna Offerta
+    </h2>
+</ng-template>

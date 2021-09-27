@@ -1,0 +1,32 @@
+{
+  "name": "fantacalcio_2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch backend --exec npm run build",
+    "build": "rm -rf dist && babel backend -d dist && npm run serve",
+    "serve": "node dist/server.js"
+  },
+  "author": "Salvatore De Rosa",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-session": "^1.17.2",
+    "mongoose": "^5.13.5",
+    "path": "^0.12.7",
+    "pusher": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.15.0",
+    "nodemon": "^2.0.12"
+  }
+}

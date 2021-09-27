@@ -1,0 +1,30 @@
+{{errorMsg}}
+
+<ng-container *ngIf="!loading; else spinner">
+   <form class="form" [formGroup]="teamForm" (submit)='handleSubmit(teamForm.value)'>
+        <div class='form' formArrayName='members' *ngIf="members" >
+            <div *ngFor="let team of members.controls; let i = index;" [formGroupName]="i">
+                <mat-form-field appearance="fill" floatLabel="always" >
+                    <mat-label>Giocatore {{i + 1}} ({{team.value.owner}})</mat-label>
+                    <input matInput type="text" class="example-right-align" formControlName="owner"/>
+                    <span matPrefix><img src="./assets/images/teams.png"></span> 
+                </mat-form-field>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Squadra {{i + 1}} ({{team.value.name}})</mat-label>
+                    <input matInput type="text" class="example-right-align" formControlName='name'>
+                    <span matPrefix><img src="./assets/images/jersey.png"></span> 
+                </mat-form-field>
+            </div>
+        </div>
+        <button type="submit" mat-raised-button color='primary' [disabled]='!teamForm.valid'>
+            Procedi
+        </button>
+        <button [routerLink]="['/new-game']" routerLinkActive="router-link-active" type="button" mat-raised-button color='warn' [disabled]='teamForm.pending'>
+            Indietro
+        </button>
+    </form> 
+</ng-container>
+
+<ng-template #spinner>
+    <mat-progress-bar mode="indeterminate" class="progress"></mat-progress-bar>
+</ng-template>
