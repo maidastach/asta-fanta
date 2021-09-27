@@ -1,9 +1,10 @@
 import Pusher from "pusher";
+import config from './config';
 
 export const pusher = new Pusher({
-  appId: "1247211",
-  key: "7a8e6cf5b8698223b0dd",
-  secret: "4d367a2041458a98f0d3",
+  appId: config.PUSHER_ID,
+  key: config.PUSHER_KEY,
+  secret: config.PUSHER_SECRET,
   cluster: "ap4",
   useTLS: true
 });

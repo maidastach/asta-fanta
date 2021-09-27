@@ -6,6 +6,9 @@ dotenv.config();
 export default {
     PORT: process.env.PORT || 4201,
     MONGODB_URL: process.env.MONGODB_URL,
+    PUSHER_SECRET: process.env.PUSHER_SECRET,
+    PUSHER_KEY: process.env.PUSHER_KEY,
+    PUSHER_ID: process.env.PUSHER_ID,
     MONGODB_CONFIG: 
         {
             useNewUrlParser: true,
