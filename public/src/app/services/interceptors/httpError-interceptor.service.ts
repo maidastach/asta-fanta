@@ -2,13 +2,13 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { AppService } from "../../app.service";
+import { ProcessService } from "../processing/process.service";
 
 @Injectable({ providedIn: 'root' })
 
 export class HttpErrorInterceptorService implements HttpInterceptor
 {
-    constructor(private appService: AppService) {}
+    constructor(private processService: ProcessService) {}
     
     intercept(req: HttpRequest<any>, next: HttpHandler)
     {
@@ -17,7 +17,9 @@ export class HttpErrorInterceptorService implements HttpInterceptor
             .pipe(
                 catchError((error: HttpErrorResponse) => 
                 {
-                    this.appService.loadingSource.next(false)
+                    const errorMsg = error.error.message ? error.error.message : 'Internal Error'
+                    this.processService.setLoading(false)
+                    this.processService.setErroMsg(errorMsg)
                     console.log('interceptor caught an error')
                     //error.status for the code, error.error is my error
                     return throwError(error);  

@@ -20,7 +20,7 @@ export class UserConfigComponent implements OnInit
   ngOnInit(): void
   {
     this.userService
-      .getAllLeagues()
+      .getMyLeagues()
         .subscribe(
           (res: LeaguesResponse) => this.leagues = res.response
         )

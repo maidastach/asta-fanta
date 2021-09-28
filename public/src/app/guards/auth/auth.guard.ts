@@ -3,16 +3,16 @@ import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStat
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthResponse } from 'src/app/Models';
-import { AppService } from '../../app.service';
+import { ProcessService } from 'src/app/services/processing/process.service';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthGuard implements CanActivate, CanLoad 
 {
-  constructor(private authService: AuthService, private router: Router, private appService: AppService) {}
+  constructor(private authService: AuthService, private router: Router, private processService: ProcessService) {}
 
-  canLoad(route: Route):  Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
+  canLoad(route: Route): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
     const location: string = `/${route.path}`
     return this.authService
@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate, CanLoad
 
   handleRedirect(response: AuthResponse, location: string): boolean
   {
-    this.appService.loadingSource.next(false)
+    this.processService.loadingSource.next(false)
     if(location === '/')
       return (response.success) ? this.goNext() : true
     if(location === '/game')

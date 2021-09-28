@@ -16,7 +16,7 @@ export class HasGameGuard implements CanActivate, CanLoad
   canLoad(route: Route):  Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
     return this.userService
-      .getAllLeagues()
+      .getMyLeagues()
         .pipe(
           map(
             (res: LeaguesResponse) => {
@@ -32,7 +32,7 @@ export class HasGameGuard implements CanActivate, CanLoad
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
     return this.userService
-      .getAllLeagues()
+      .getMyLeagues()
         .pipe(
           map(
             (res: LeaguesResponse) => res.success

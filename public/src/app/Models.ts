@@ -156,6 +156,7 @@ export interface AuthResponse
 {
     success: boolean;
     message: string;
-    field: string;
+    response: any;
+    flag: string;
 }
 

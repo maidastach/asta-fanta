@@ -21,7 +21,7 @@ export const login = async(req, res, next) =>
         else
         {
             req.session.user = user._id.toString();
-            res.status(200).send({ success: true, message: 'LOGIN SUCCESSFULL' })
+            res.status(200).send({ success: true, message: 'LOGIN SUCCESSFULL', response: user.user })
         }
     }
 }
@@ -128,9 +128,9 @@ export const isLogged = async(req, res, next) =>
 {
     const user = req.session.user
     if(!user)
-        return res.status(404).send({ success: false, message: 'You are not logged in' })
+        return res.send({ success: false, message: 'You are not logged in' })
     else
-        return res.status(200).send({ success: true, message: 'Autorized' })
+        return res.send({ success: true, message: 'Autorized' })
 }
 
 export const logout = async(req, res, next) => 

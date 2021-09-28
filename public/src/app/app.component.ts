@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppService } from './app.service';
 import { AuthService } from './services/auth/auth.service';
+import { ProcessService } from './services/processing/process.service';
 
 @Component(
   {
@@ -14,13 +14,17 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent implements OnInit
 {
   public loading: boolean = true;
+  public errorMsg!: string;
+  public successMsg!: string;
   public title = 'Asta Fantacalcio | Salvatore De Rosa';
 
-  constructor(private appService: AppService, private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private processService: ProcessService) {}
 
   ngOnInit(): void
   {
-    this.appService.loading.subscribe(loading => this.loading = loading)
+    this.processService.loading.subscribe(loading => this.loading = loading)
+    this.processService.errorMsg.subscribe(errorMsg => this.errorMsg = errorMsg)
+    this.processService.successMsg.subscribe(successMsg => this.successMsg = successMsg)
   }
 
   logout(): void
