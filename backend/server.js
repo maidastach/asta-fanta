@@ -36,8 +36,8 @@ app.use('/api/auth', AuthRouter);
 app.use(
     (err, req, res, next) =>
     {
-        if(res.headersSent)
-            return next(err)
+        // if(res.headersSent)
+        //     return next(err)
         console.log('next method');
         return res.status(500).send(err.message)
     }

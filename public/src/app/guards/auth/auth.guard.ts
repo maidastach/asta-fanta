@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate, CanLoad
   canLoad(route: Route): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
     const location: string = `/${route.path}`
+
     return this.authService
       .isLogged()
         .pipe(
@@ -28,6 +29,9 @@ export class AuthGuard implements CanActivate, CanLoad
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   {
+    this.processService.errorMsg.subscribe(
+      errorMsg => errorMsg ? this.processService.setLoading(true) : this.processService.setLoading(false)
+    )
     const location: string = state.url
     return this.authService
       .isLogged()
@@ -40,21 +44,21 @@ export class AuthGuard implements CanActivate, CanLoad
 
   handleRedirect(response: AuthResponse, location: string): boolean
   {
-    this.processService.loadingSource.next(false)
+    //this.processService.loadingSource.next(false)
     if(location === '/')
       return (response.success) ? this.goNext() : true
-    if(location === '/game')
-      return (!response.success) ? this.goHome() : true
-    else if(location === '/game/new-game')
-      return (!response.success) ? this.goHome() : true
-    else if(location === '/game/load-game')
-      return (!response.success) ? this.goHome() : true
-    else if(location === '/game/customize')
-      return (!response.success) ? this.goHome() : true
-    else if (location === '/asta')
-      return (!response.success) ? this.goHome() : true
+    // if(location === '/game')
+    //   return (!response.success) ? this.goHome() : true
+    // else if(location === '/game/new-game')
+    //   return (!response.success) ? this.goHome() : true
+    // else if(location === '/game/load-game')
+    //   return (!response.success) ? this.goHome() : true
+    // else if(location === '/game/customize')
+    //   return (!response.success) ? this.goHome() : true
+    // else if (location === '/asta')
+    //   return (!response.success) ? this.goHome() : true
     else
-      return this.goHome();
+      return (!response.success) ? this.goHome() : true;
   }
 
   goHome(): boolean
@@ -65,7 +69,7 @@ export class AuthGuard implements CanActivate, CanLoad
 
   goNext(): boolean
   {
-    this.router.navigate(['game/new-game'])
+    this.router.navigate(['/game'])
     return false;
   }
   

@@ -45,7 +45,7 @@ export class CustomizeComponent implements OnInit, OnDestroy
           {
             this.teams = teams;
             teams.forEach(team => this.addTeam(team))            
-            this.loading = false
+            this.loading = false           
           },
           (error: ErrorEvent) =>
           {

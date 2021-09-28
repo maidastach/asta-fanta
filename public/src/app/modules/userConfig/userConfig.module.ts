@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { UserConfigComponent } from './userConfig.component';
 
 import { UserConfigRoutingModule } from './userConfig-routing.module';
-import { AuthGuard } from 'src/app/guards/auth/auth.guard';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { HasGameGuard } from 'src/app/guards/game/has-game.guard';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule(
@@ -20,6 +20,7 @@ import { HasGameGuard } from 'src/app/guards/game/has-game.guard';
       CommonModule,
       UserConfigRoutingModule,
       AngularMaterialModule,
+      ReactiveFormsModule
     ],
     providers: [HasGameGuard]
   }

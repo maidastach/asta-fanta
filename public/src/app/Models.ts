@@ -12,6 +12,9 @@ export interface User
     email: string;
     password: string;
     isAdmin: boolean;
+    teams: Team[];
+    leagues: League[];
+    isAdminHere: League[];
 };
 
 export interface Login
@@ -30,13 +33,20 @@ export interface Register
 
 export interface League
 {
-    name: string;
-    playersMin: number;
-    playersMax: number;
-    teamsNumber: number;
-    game: string;
-    isRandom: boolean;
-    credits: number;
+    _id: string;
+    admins: User[];
+    users: User[];
+    teams: Team[];
+    config: 
+        {
+            name: string;
+            playersMin: number;
+            playersMax: number;
+            teamsNumber: number;
+            isMantra: boolean;
+            isRandom: boolean;
+            credits: number; 
+        }
 }
 
 export interface Team 

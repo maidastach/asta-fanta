@@ -28,14 +28,14 @@ export class AstaComponent implements OnInit
 
   ngOnInit(): void 
   {
-    this.astaService.config
-      .subscribe(
-        (config: ConfigForm) =>
-        {
-          this.game = config.league?.game
-          this.isRandom = config.league?.isRandom
-        }
-      )
+    // this.astaService.config
+    //   .subscribe(
+    //     (league: ConfigForm) =>
+    //     {
+    //       this.game = config.league?.game
+    //       this.isRandom = config.league?.isRandom
+    //     }
+    //   )
     this.astaService.players.subscribe((players: Players[]) => this.players = players)
     this.astaService.currentPlayer.subscribe((player: Players) => this.player = player)
     this.astaService.isAstaStarted.subscribe((isAstaStarted: boolean) => this.isAstaStarted = isAstaStarted)

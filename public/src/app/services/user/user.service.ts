@@ -16,7 +16,7 @@ export class UserService {
 
   getMyLeagues(): Observable<LeaguesResponse>
   {
-    return this.http.get<LeaguesResponse>('/api/users/leaguesa', { withCredentials: true })
+    return this.http.get<LeaguesResponse>('/api/users/leagues', { withCredentials: true })
   }
   
   setLeague(league: League): Observable<League>

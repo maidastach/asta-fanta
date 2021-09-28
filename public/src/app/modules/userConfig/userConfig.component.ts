@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LeaguesResponse, League } from 'src/app/Models';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -14,8 +15,9 @@ import { UserService } from 'src/app/services/user/user.service';
 export class UserConfigComponent implements OnInit
 {
   public leagues!: League[];
+  public league!: League;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void
   {
@@ -26,5 +28,14 @@ export class UserConfigComponent implements OnInit
         )
   }
 
+  setLeagueValue(event: any): void
+  {
+    this.league = event.value
+  }
+
+  loadGame(): void
+  {
+    this.router.navigate([`/game/load-game/${this.league._id}`])
+  }
 
 }

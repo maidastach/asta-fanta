@@ -18,7 +18,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor
                 catchError((error: HttpErrorResponse) => 
                 {
                     const errorMsg = error.error.message ? error.error.message : 'Internal Error'
-                    this.processService.setLoading(false)
+                    //this.processService.setLoading(false)
                     this.processService.setErroMsg(errorMsg)
                     console.log('interceptor caught an error')
                     //error.status for the code, error.error is my error

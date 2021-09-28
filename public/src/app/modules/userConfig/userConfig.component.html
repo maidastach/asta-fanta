@@ -1,16 +1,39 @@
-<router-outlet></router-outlet>
-<h1>Game</h1>
+<h1>Asta Fantacalcio</h1>
 
-<!-- if no game go straight to new game -->
-
-<!-- if game, show games with radio button and carica -->
-
-<ng-container *ngIf='leagues'>
+<ng-container *ngIf='leagues && leagues.length > 0; else noLeague'>
     <h2>Le Tue Leghe</h2>
-    <ng-container *ngFor='let league of leagues'>
-        {{league.name}}
-    </ng-container>
+        <label id="example-radio-group-label">Carica una lega</label>
+
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            (change)='setLeagueValue($event)'
+            required=true
+        >
+            <mat-radio-button 
+                class="example-radio-button" 
+                *ngFor="let league of leagues"
+                [value]='league'
+                checked=false
+
+            >
+                {{league.config.name}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <button 
+            mat-raised-button 
+            color='primary'
+            (click)='loadGame()'
+            [disabled]='league ? false : true'
+        >
+            Carica {{league && league.config.name}}
+        </button>
 </ng-container>
+
+<ng-template #noLeague>
+    <h2>Non hai Leghe Salvate.</h2>
+    <h3>Iniziane una nuova</h3>
+</ng-template>
 
 <button 
     mat-raised-button 
@@ -21,11 +44,4 @@
     Nuovo Gioco
 </button>
 
-<button 
-    mat-raised-button 
-    color='primary' 
-    [routerLink]="['/game/load-game']" 
-    routerLinkActive="router-link-active" 
->
-    Carica Gioco
-</button>
+<router-outlet></router-outlet>

@@ -134,44 +134,44 @@ export class PreferencesComponent implements OnInit, OnDestroy
           )
   }
 
-  generateTeam(): Team[]
-  {
-    const league: League = this.leagueForm.value
-    const game: string = league.game
-    const teamsNumber: number = league.teamsNumber
-    const credits: number = league.credits
+  // generateTeam(): Team[]
+  // {
+  //   const league: League = this.leagueForm.value
+  //   const game: string = league.game
+  //   const teamsNumber: number = league.teamsNumber
+  //   const credits: number = league.credits
     
-    let teams: Team[] = [];
+  //   let teams: Team[] = [];
 
-    for(let i = 0; i < teamsNumber; i++)
-    {
-      teams = 
-      [
-        ...teams, 
-        {
-            owner: `Giocatore ${i+1}`,
-            name: `Squadra ${i+1}`,
-            players: 
-              (game === 'Mantra')
-                ? {
-                    goalkeepers: [],
-                    defenders: { dc: [], dd: [], ds: [], e: [] },
-                    midfielders: { m: [], c: [], tc: [] },
-                    strikers: { w: [], a: [], pc: [] },
-                  } 
-                : {
-                    goalkeepers: [],
-                    defenders: [],
-                    midfielders: [],
-                    strikers: [],
-                  },
-            creditTot: credits,
-            creditLeft: credits
-        }
-      ]
-    }
-    return teams
-  }
+  //   for(let i = 0; i < teamsNumber; i++)
+  //   {
+  //     teams = 
+  //     [
+  //       ...teams, 
+  //       {
+  //           owner: `Giocatore ${i+1}`,
+  //           name: `Squadra ${i+1}`,
+  //           players: 
+  //             (game === 'Mantra')
+  //               ? {
+  //                   goalkeepers: [],
+  //                   defenders: { dc: [], dd: [], ds: [], e: [] },
+  //                   midfielders: { m: [], c: [], tc: [] },
+  //                   strikers: { w: [], a: [], pc: [] },
+  //                 } 
+  //               : {
+  //                   goalkeepers: [],
+  //                   defenders: [],
+  //                   midfielders: [],
+  //                   strikers: [],
+  //                 },
+  //           creditTot: credits,
+  //           creditLeft: credits
+  //       }
+  //     ]
+  //   }
+  //   return teams
+  // }
 
 }
 
