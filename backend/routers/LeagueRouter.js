@@ -8,7 +8,6 @@ const LeagueRouter = express.Router();
 
 LeagueRouter.get('/', asyncHandler(getEveryleague))
 
-
 LeagueRouter.put('/:id', asyncHandler(updateLeague))
 
 LeagueRouter.delete('/:id', asyncHandler(deleteLeague))
