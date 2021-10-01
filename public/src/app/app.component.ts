@@ -13,7 +13,7 @@ import { ProcessService } from './services/processing/process.service';
 
 export class AppComponent implements OnInit
 {
-  public loading: boolean = true;
+  public loading!: boolean;
   public errorMsg!: string;
   public successMsg!: string;
   public title = 'Asta Fantacalcio | Salvatore De Rosa';

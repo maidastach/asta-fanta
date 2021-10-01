@@ -70,10 +70,10 @@ export const createLeague = async(req, res, next) =>
     if(!league)
         return next()
 
-    league.users.push(user)
+    //league.users.push(user)
     league.admins.push(user)
 
-    user.leagues.push(league)
+    //user.leagues.push(league)
     user.isAdminHere.push(league)
 
     await user.save(
@@ -85,10 +85,3 @@ export const createLeague = async(req, res, next) =>
     
     return res.send({ success: true, message: 'League created', response: league, user: user })
 }
-
-export const getLeaguesByUser = async(req, res, next) =>
-{
-
-}
-
-//LeagueRouter.get('/:user', asyncHandler(getLeaguesByAdmin))

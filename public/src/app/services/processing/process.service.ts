@@ -8,6 +8,9 @@ export class ProcessService
   public loadingSource = new BehaviorSubject<boolean>(true)
   public loading = this.loadingSource.asObservable();
 
+  public moduleLoadingSource = new BehaviorSubject<boolean>(true)
+  public moduleLoading = this.loadingSource.asObservable();
+
   public errorMsgSource = new BehaviorSubject<string>('')
   public errorMsg = this.errorMsgSource.asObservable();
 
@@ -19,6 +22,11 @@ export class ProcessService
   setLoading(value: boolean): void
   {
     this.loadingSource.next(value)
+  }
+
+  setModuleLoading(value: boolean): void
+  {
+    this.moduleLoadingSource.next(value)
   }
 
   setErroMsg(value: string): void

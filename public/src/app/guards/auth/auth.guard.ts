@@ -14,7 +14,9 @@ export class AuthGuard implements CanActivate, CanLoad
 
   canLoad(route: Route): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree 
   {
+    //this.processService.loadingSource.next(true)
     const location: string = `/${route.path}`
+    console.log('canLoad AuthGuard', route.path);
 
     return this.authService
       .isLogged()
@@ -29,10 +31,9 @@ export class AuthGuard implements CanActivate, CanLoad
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   {
-    this.processService.errorMsg.subscribe(
-      errorMsg => errorMsg ? this.processService.setLoading(true) : this.processService.setLoading(false)
-    )
-    const location: string = state.url
+
+    const location: string = state.url    
+    console.log('canActivate AuthGuard', location);
     return this.authService
       .isLogged()
         .pipe(
@@ -47,16 +48,6 @@ export class AuthGuard implements CanActivate, CanLoad
     //this.processService.loadingSource.next(false)
     if(location === '/')
       return (response.success) ? this.goNext() : true
-    // if(location === '/game')
-    //   return (!response.success) ? this.goHome() : true
-    // else if(location === '/game/new-game')
-    //   return (!response.success) ? this.goHome() : true
-    // else if(location === '/game/load-game')
-    //   return (!response.success) ? this.goHome() : true
-    // else if(location === '/game/customize')
-    //   return (!response.success) ? this.goHome() : true
-    // else if (location === '/asta')
-    //   return (!response.success) ? this.goHome() : true
     else
       return (!response.success) ? this.goHome() : true;
   }

@@ -35,7 +35,7 @@ export const getOneLeague = async(req, res, next) =>
         )
 }
 
-export const getMyLeagues = async(req, res, next) => 
+export const getAdminLeagues = async(req, res, next) => 
 {
     const userId = req.session.user
     if(!userId) 
@@ -44,7 +44,7 @@ export const getMyLeagues = async(req, res, next) =>
     await User.findById(userId)
         .populate(
             {
-                path: 'leagues',
+                path: 'isAdminHere',
                 model: 'Leagues',
             }
         )
@@ -54,7 +54,7 @@ export const getMyLeagues = async(req, res, next) =>
                 if(err | !user)
                     return next()
                 else if(user)
-                    return res.send({ success: true, response: user.leagues })
+                    return res.send({ success: true, response: user.isAdminHere })
             }
         )
 }

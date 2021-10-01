@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth/auth.guard';
 import { HasGameGuard } from 'src/app/guards/game/has-game.guard';
+import { LeaguesResolver } from 'src/app/resolvers/leagues.resolver';
 import { UserConfigComponent } from './userConfig.component';
 
 const routes: Routes = 
@@ -9,6 +10,8 @@ const routes: Routes =
   {
     path: '', // '/game' route
     component: UserConfigComponent,
+    resolve: { leagues: LeaguesResolver },
+    pathMatch: 'full'
   },
   {
     path: 'new-game',

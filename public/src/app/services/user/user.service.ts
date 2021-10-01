@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { LeagueResponse, LeaguesResponse, Team, League } from '../../Models';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LeagueResponse, LeaguesResponse, Team, League, AuthResponse } from '../../Models';
 
 @Injectable({ providedIn: 'root' })
 
 export class UserService {
 
+  public leaguesSource = new BehaviorSubject<League[]>([])
+  public leagues = this.leaguesSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
-  getLeague(): Observable<LeagueResponse>
+  setLocalLeagues(leagues: League[]): void
   {
-    return this.http.get<LeagueResponse>('/api/users/league', { withCredentials: true })
+    this.leaguesSource.next(leagues)
   }
 
-  getMyLeagues(): Observable<LeaguesResponse>
+  getLeague(id: string): Observable<LeagueResponse>
+  {
+    return this.http.get<LeagueResponse>(`/api/users/leagues/${id}`, { withCredentials: true })
+  }
+
+  getAdminLeagues(): Observable<LeaguesResponse>
   {
     return this.http.get<LeaguesResponse>('/api/users/leagues', { withCredentials: true })
   }

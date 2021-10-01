@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LeagueResolver } from 'src/app/resolvers/league.resolver';
 import { LoadgameComponent } from './loadgame.component';
 
 const routes: Routes = [
@@ -10,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: ':id', 
-    component: LoadgameComponent 
+    component: LoadgameComponent,
+    resolve: { league: LeagueResolver}
   }
 ];
 

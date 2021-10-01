@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LeaguesResponse, League } from 'src/app/Models';
+import { ProcessService } from 'src/app/services/processing/process.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 
@@ -17,15 +18,12 @@ export class UserConfigComponent implements OnInit
   public leagues!: League[];
   public league!: League;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private processService: ProcessService) { }
 
   ngOnInit(): void
   {
-    this.userService
-      .getMyLeagues()
-        .subscribe(
-          (res: LeaguesResponse) => this.leagues = res.response
-        )
+    this.leagues = this.activatedRoute.snapshot.data['leagues']
+    setTimeout(() => this.processService.setLoading(false), 1)
   }
 
   setLeagueValue(event: any): void

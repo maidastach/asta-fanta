@@ -91,7 +91,7 @@ export class AstaService
 
           //GET THE CONFIG FILE
     this.userService
-    .getLeague()
+    .getLeague('')
       .subscribe(
         config => 
         {

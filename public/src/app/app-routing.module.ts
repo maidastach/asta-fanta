@@ -7,19 +7,18 @@ const routes: Routes =
   {
     path: '',
     loadChildren: () => import('./modules/auth/home.module').then(m => m.HomeModule), //homeModule
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard],
+    pathMatch: 'full'
   },
   {
     path: 'game',
     loadChildren: () => import('./modules/userConfig/userConfig.module').then(m => m.UserConfigModule), //userConfigModule
     canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
   },
   {
     path: 'asta',
     loadChildren: () => import('./modules/asta/asta.module').then(m => m.AstaModule),
     canLoad: [AuthGuard],
-    canActivate: [AuthGuard]
   }
 ];
 
