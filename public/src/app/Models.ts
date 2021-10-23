@@ -51,7 +51,8 @@ export interface League
 
 export interface Team 
 {
-    owner: string;
+    _id: string;
+    owner: { name: string; _id: string; };
     name: string;
     players: 
         {

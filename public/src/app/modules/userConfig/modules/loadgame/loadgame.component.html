@@ -1,3 +1,102 @@
-<h1>{{league.config.name}}</h1>
+<ul *ngIf='!isEditMode'>
+    <li>
+        <h1>{{league.config.name}}</h1>
+    </li>
+    <li>
+        <h3>Admins:</h3>
+        <p *ngFor="let admin of league.admins">{{admin.user}}</p>
+    </li>
+    <li>
+        <p>Giocatori min. {{league.config.playersMin}}</p>
+    </li>
+    <li>
+        <p>Giocatori max. {{league.config.playersMax}}</p>
+    </li>
+    <li>
+        <p>Squadre: {{league.config.teamsNumber}}</p>
+    </li>
+    <li>
+        <p>Crediti: {{league.config.credits}}</p>
+    </li>
+    <li>
+        <p>Gioco: {{league.config.isMantra ? 'Mantra' : 'Classic'}}</p>
+    </li>
+    <li>
+        <p>Chiamata: {{league.config.isRandom ? 'Random' : 'Semplice'}}</p>
+    </li>
+    <li>
+        <button mat-raised-button color='primary' (click)='handleEditMode()'>
+            Modifica
+        </button>
+        <button mat-raised-button color='primary' type='button' (click)='goToCustomize()'>
+            Procedi
+        </button>
+        <button mat-raised-button type='button' [routerLink]="['/game']" routerLinkActive="router-link-active">
+            Indietro
+        </button>
+    </li>
+</ul>
+
+<ng-container *ngIf='isEditMode'>
+    <form class='configForm' [formGroup]="leagueForm" (submit)='handleSubmit(leagueForm.value)'>
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Nome della Lega</mat-label>
+            <input matInput type="text" class="example-right-align" formControlName='name'>
+            <span matPrefix><img src="./assets/images/jersey.png"></span>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Giocatori min.</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName='playersMin'>
+            <span matPrefix><img src="./assets/images/jersey.png"></span>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Giocatori max.</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName='playersMax'>
+            <span matPrefix><img src="./assets/images/jersey.png"></span>
+        </mat-form-field> 
+    
+        <!-- <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Numero Squadre</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName='teamsNumber'>
+            <span matPrefix><img src="./assets/images/teams.png"></span>
+        </mat-form-field> -->
+    
+        <!-- <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Crediti</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName='credits'>
+            <span matPrefix><img src="./assets/images/teams.png"></span>
+        </mat-form-field>  -->
+    
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Tipo di Gioco</mat-label>
+            <mat-select class="example-right-align" formControlName='isMantra'>
+                <mat-option [value]=true>Mantra</mat-option>
+                <mat-option [value]=false>Classic</mat-option>
+            </mat-select>
+            <span matPrefix><img src="./assets/images/game.png"></span>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Chiamata</mat-label>
+            <mat-select class="example-right-align" formControlName='isRandom'>
+                <mat-option [value]=true>Random</mat-option>
+                <mat-option [value]=false>Semplice</mat-option>
+            </mat-select>
+            <span matPrefix><img src="./assets/images/random.png"></span>
+        </mat-form-field>
+        <div>
+            <button type="submit" mat-raised-button color='primary' [disabled]='!leagueForm.valid'>
+                Procedi
+            </button>
+            <button mat-raised-button type='button' (click)='handleEditMode()'>
+                Annulla Modifiche
+            </button>
+        </div>
+    </form>
+</ng-container>
+
+
 
 {{league | json}}

@@ -8,6 +8,7 @@ import config from './config';
 import AuthRouter from "./routers/AuthRouter";
 import LeagueRouter from "./routers/LeagueRouter";
 import UserRouter from "./routers/UserRouter";
+import TeamsRouter from "./routers/TeamsRouter";
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use('/api/leagues', LeagueRouter);
 // app.use('/api/asta', AstaRouter);
 app.use('/api/users', UserRouter);
 app.use('/api/auth', AuthRouter);
-// app.use('/api/teams', TeamsRouter);
+app.use('/api/teams', TeamsRouter);
 // app.use('/api/players', PlayersRouter);
 
 

@@ -35,10 +35,9 @@
 
             <mat-form-field appearance="fill" floatLabel="always">
                 <mat-label>Tipo di Gioco</mat-label>
-                <mat-select class="example-right-align" formControlName='game'>
-                    <ng-container *ngFor='let game of games'>
-                        <mat-option [value]='game'>{{game}}</mat-option>
-                    </ng-container>
+                <mat-select class="example-right-align" formControlName='isMantra'>
+                    <mat-option [value]=true>Mantra</mat-option>
+                    <mat-option [value]=false>Classic</mat-option>
                 </mat-select>
                 <span matPrefix><img src="./assets/images/game.png"></span>
             </mat-form-field>

@@ -27,6 +27,7 @@ const teamsSchema = new mongoose.Schema
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' }
       },
     name: { type: String, required: true },
+    league: { type: mongoose.Schema.Types.ObjectId, ref: 'Leagues', required: true },
     players : 
       {
         goalkeepers: [ playerSchema ],

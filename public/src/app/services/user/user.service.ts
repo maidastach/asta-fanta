@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LeagueResponse, LeaguesResponse, Team, League, AuthResponse } from '../../Models';
+import { LeagueResponse, LeaguesResponse, Team, League, AuthResponse, TeamsResponse } from '../../Models';
 
 @Injectable({ providedIn: 'root' })
 
@@ -27,20 +27,28 @@ export class UserService {
     return this.http.get<LeaguesResponse>('/api/users/leagues', { withCredentials: true })
   }
   
-  setLeague(league: League): Observable<League>
+  setLeague(league: League): Observable<LeagueResponse>
   {
-    return this.http.post<League>('/api/users/league', league, { withCredentials: true })
+    return this.http.post<LeagueResponse>('/api/leagues', league, { withCredentials: true })
   }
 
-  getTeams(): Observable<Team[]>
+  updateLeagueConfig(id: string, config: League['config']): Observable<LeagueResponse>
   {
-    return this.http.get<Team[]>('/api/teams')
+    return this.http.put<LeagueResponse>(`/api/leagues/${id}`, config, { withCredentials: true })
   }
 
-  updateTeams(teams: Team[]): Observable<Team[]>
+  getTeamsByLeagueId(id: string): Observable<TeamsResponse>
   {
-    return this.http.put<Team[]>('/api/teams', teams, { withCredentials: true })
+    return this.http.get<TeamsResponse>(`/api/teams/${id}`)
   }
 
+  updateTeamsOwnership(id: string, teamConfig: { teams: Team[], newTeams: any, credits: number }): Observable<LeagueResponse>
+  {
+    return this.http.put<LeagueResponse>(`/api/teams/${id}`, teamConfig, { withCredentials: true })
+  }
 
+  deleteTeamFromConfig(id: string): Observable<TeamsResponse>
+  {
+    return this.http.delete<TeamsResponse>(`/api/teams/${id}`, { withCredentials: true })
+  }
 }

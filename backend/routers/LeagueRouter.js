@@ -1,6 +1,6 @@
 import express from "express";
 import asyncHandler from 'express-async-handler';
-import { getEveryleague, updateLeague, deleteLeague, createLeague } from "../controllers/LeagueControllers";
+import { getEveryleague, deleteLeague, createLeague, updateLeagueConfig } from "../controllers/LeagueControllers";
 
 const LeagueRouter = express.Router();
 
@@ -8,10 +8,10 @@ const LeagueRouter = express.Router();
 
 LeagueRouter.get('/', asyncHandler(getEveryleague))
 
-LeagueRouter.put('/:id', asyncHandler(updateLeague))
-
 LeagueRouter.delete('/:id', asyncHandler(deleteLeague))
 
 LeagueRouter.post('/', asyncHandler(createLeague))
+
+LeagueRouter.put('/:id', asyncHandler(updateLeagueConfig))
 
 export default LeagueRouter;

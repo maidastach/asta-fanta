@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { League, Team } from 'src/app/Models';
+import { League, LeagueResponse, Team } from 'src/app/Models';
 import { UserService } from 'src/app/services/user/user.service';
 import { DialogDataComponent } from '../dialog-data/dialog-data.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ProcessService } from 'src/app/services/processing/process.service';
 
 @Component(
   {
@@ -17,7 +18,7 @@ import { Subscription } from 'rxjs';
 
 export class PreferencesComponent implements OnInit, OnDestroy
 {
-  public games: string[] = ['Mantra', 'Classic'];
+  //public games: string[] = ['Mantra', 'Classic'];
   public config: boolean = true;
   public loading!: boolean;
   public errorMsg!: string;
@@ -25,20 +26,22 @@ export class PreferencesComponent implements OnInit, OnDestroy
 
   public leagueForm!: FormGroup; 
 
-  constructor(private fb: FormBuilder, private userService: UserService, public dialog: MatDialog, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: UserService, public dialog: MatDialog, private router: Router, private processService: ProcessService) { }
 
   ngOnInit(): void
   {
+    setTimeout(() => this.processService.setLoading(false), 1)
+
     this.loading = true
     this.leagueForm = this.fb.group(
       {
         name: ['', Validators.required],
-        playersMin: [25, Validators.required],
+        playersMin: [25, [ Validators.min(18), Validators.required ]],
         playersMax: [30, Validators.required],
-        teamsNumber:['', [Validators.min(2), Validators.required]],
-        game: ['', Validators.required],
+        teamsNumber:['', [ Validators.min(2), Validators.required ]],
+        isMantra: [null, Validators.required],
         isRandom: [null, Validators.required],
-        credits: ['', Validators.required],
+        credits: ['', [ Validators.min(20), Validators.required ]],
       }
     )
     this.loading = false;
@@ -115,11 +118,11 @@ export class PreferencesComponent implements OnInit, OnDestroy
                 this.userService
                   .setLeague(league)
                     .subscribe(
-                      () =>
+                      (response: LeagueResponse) =>
                       {
                         this.loading = false
                         this.leagueForm.reset();
-                        this.router.navigate(['/game/customize'])
+                        this.router.navigate([`/game/customize/${response.response._id}`])
                       },
                       (error: ErrorEvent) => 
                       {

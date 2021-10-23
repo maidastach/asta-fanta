@@ -14,14 +14,28 @@
                     <input matInput type="text" class="example-right-align" formControlName='name'>
                     <span matPrefix><img src="./assets/images/jersey.png"></span> 
                 </mat-form-field>
+                <button type="button" (click)='deleteTeam(team.value.id, i)'>Delete</button>
             </div>
         </div>
-        <button type="submit" mat-raised-button color='primary' [disabled]='!teamForm.valid'>
-            Procedi
-        </button>
-        <button [routerLink]="['/new-game']" routerLinkActive="router-link-active" type="button" mat-raised-button color='warn' [disabled]='teamForm.pending'>
-            Indietro
-        </button>
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>Credits</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName='credits'>
+            <span matPrefix><img src="./assets/images/jersey.png"></span> 
+        </mat-form-field>
+        <div>
+            <button type='button' (click)='addTeam()'>
+                Aggiungi Squadra
+            </button>
+        </div>
+        <div>
+            <button type="submit" mat-raised-button color='primary' [disabled]='!teamForm.valid'>
+                Procedi
+            </button>
+            <button [routerLink]="['/game']" routerLinkActive="router-link-active" type="button" mat-raised-button color='warn' [disabled]='teamForm.pending'>
+                Indietro
+            </button>
+        </div>
+
     </form> 
 </ng-container>
 

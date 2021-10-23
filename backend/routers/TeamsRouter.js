@@ -1,7 +1,14 @@
-// import express from "express";
-// import Config from "../models/configModel";
+import express from "express";
+import asyncHandler from 'express-async-handler';
+import { getTeamsByLeagueId, updateTeamsByLeagueId, deleteTeamFromConfig } from "../controllers/TeamControllers";
 
-// const TeamsRouter = express.Router()
+const TeamsRouter = express.Router()
+
+TeamsRouter.get('/:id', asyncHandler(getTeamsByLeagueId))
+
+TeamsRouter.put('/:id', asyncHandler(updateTeamsByLeagueId))
+
+TeamsRouter.delete('/:id', asyncHandler(deleteTeamFromConfig))
 
 // TeamsRouter.get(
 //     '/', 
@@ -129,4 +136,4 @@
 //     }
 // })
 
-// export default TeamsRouter;
+export default TeamsRouter;
