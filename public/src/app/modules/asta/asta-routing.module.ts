@@ -6,7 +6,7 @@ import { AstaComponent } from './asta.component';
 const routes: Routes = 
 [
   {
-    path: '',
+    path: ':id',
     component: AstaComponent,
   }
 ]

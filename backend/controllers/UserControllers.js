@@ -61,7 +61,7 @@ export const getAdminLeagues = async(req, res, next) =>
 
 export const getOneTeam = async(req, res, next) =>
 {
-    //for any user, to read just one league
+    //for any user, to read just one team
     const user = req.session.user
     !user && next()
 

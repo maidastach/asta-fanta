@@ -4,11 +4,12 @@ import cors from "cors";
 import session from 'express-session';
 import path from "path";
 import config from './config';
-// import AstaRouter from "./routers/AstaRouter";
+import AstaRouter from "./routers/AstaRouter";
 import AuthRouter from "./routers/AuthRouter";
 import LeagueRouter from "./routers/LeagueRouter";
 import UserRouter from "./routers/UserRouter";
 import TeamsRouter from "./routers/TeamsRouter";
+import PlayersRouter from "./routers/PlayersRouter";
 
 const app = express();
 
@@ -27,11 +28,11 @@ mongoose.connect(
 
 //app.use('', RedirectRouter)
 app.use('/api/leagues', LeagueRouter);
-// app.use('/api/asta', AstaRouter);
+app.use('/api/asta', AstaRouter);
 app.use('/api/users', UserRouter);
 app.use('/api/auth', AuthRouter);
 app.use('/api/teams', TeamsRouter);
-// app.use('/api/players', PlayersRouter);
+app.use('/api/players', PlayersRouter);
 
 
 app.use(

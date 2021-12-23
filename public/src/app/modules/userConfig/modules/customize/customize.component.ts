@@ -24,7 +24,14 @@ export class CustomizeComponent implements OnInit, OnDestroy
   public teamForm!: FormGroup;
   public dialogSubscription!: Subscription;
 
-  constructor(private userService: UserService, private fb: FormBuilder, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private router: Router, private processService: ProcessService) { }
+  constructor(
+    private userService: UserService, 
+    private fb: FormBuilder, 
+    public dialog: MatDialog, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router, 
+    private processService: ProcessService
+    ) { }
 
   get members(): FormArray
   {

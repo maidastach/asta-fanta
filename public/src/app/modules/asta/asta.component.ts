@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AstaService } from 'src/app/services/asta/asta.service';
+import { ProcessService } from 'src/app/services/processing/process.service';
 import { ConfigForm, Players } from '../../Models';
 
 @Component(
@@ -13,7 +14,7 @@ import { ConfigForm, Players } from '../../Models';
 export class AstaComponent implements OnInit
 {
 
-  constructor(private astaService: AstaService) { }
+  constructor(private astaService: AstaService, private processService: ProcessService) { }
 
   public players!: Players[];
   public player!: Players;
@@ -28,6 +29,7 @@ export class AstaComponent implements OnInit
 
   ngOnInit(): void 
   {
+    setTimeout(() => this.processService.setLoading(false), 1)
     // this.astaService.config
     //   .subscribe(
     //     (league: ConfigForm) =>
